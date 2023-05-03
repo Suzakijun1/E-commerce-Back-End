@@ -9,7 +9,9 @@ This application uses Express.js API and mySQL database in order to create an E-
 1. git clone the repo to your local machine.
 2. type "npm i" in order to install all of the dependencies, which include mysql2, sequelize, express, dotenv.
 3. place a .env file in the root directory of the project in order to connect to your MySQL database.
-   > - test123
+   > - DB_NAME= 'ecommerce_db'
+   > - DB_USER=''
+   > - DB_PASSWORD= ''
 
 ## Contact
 
