@@ -24,6 +24,10 @@ GET request for categories using Insomnia
    > - DB_USER=''
    > - DB_PASSWORD= ''
 
+## Demo
+
+Here is a link to video illustrating the GET, POST, PUT, and DEL for Products, Tags, and Categories in Insomnia. https://watch.screencastify.com/v/pwYqdPKsZw5RUaTkuCBU
+
 ## Contact
 
 github username: suzakijun1
