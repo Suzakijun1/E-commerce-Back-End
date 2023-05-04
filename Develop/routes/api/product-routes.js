@@ -31,26 +31,34 @@ router.get("/", async (req, res) => {
 router.get("/:id", (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
-  Product.findByPk(req.params.id),
-    {
-      include: [
-        {
-          model: Tag,
-          attributes: ["id", "tag_name"],
-          through: "ProductTag",
-        },
-        {
-          model: Category,
-          attributes: ["id", "category_name"],
-        },
-      ],
-    }
-      .then((specificProduct) => {
-        res.json(specificProduct);
-      })
-      .catch((err) => {
-        res.json(err);
-      });
+  Product.findOne({
+    where: {
+      id: req.params.id,
+    },
+
+    include: [
+      {
+        model: Tag,
+        attributes: ["id", "tag_name"],
+        through: "ProductTag",
+      },
+      {
+        model: Category,
+        attributes: ["id", "category_name"],
+      },
+    ],
+  })
+    .then((dbProduct) => {
+      if (!dbProduct) {
+        res.status(404).json({ message: "No product found with this id" });
+        return;
+      }
+      res.json(dbProduct);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 // create new product
