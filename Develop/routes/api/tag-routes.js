@@ -40,17 +40,15 @@ router.get("/:id", (req, res) => {
 
 router.post("/", (req, res) => {
   // create a new tag
-  Tag.update(req.body, {
-    where: {
-      id: req.params.id,
-    },
+  Tag.create({
+    tag_name: req.body.tag_name,
   })
     .then((dbTag) => {
       if (!dbTag) {
         res.status(404).json({ message: "No tag found with this id" });
         return;
       }
-      res.json(dbTag);
+      res.json(`Tag Created!!`);
     })
     .catch((err) => {
       console.log(err);
@@ -85,8 +83,12 @@ router.delete("/:id", (req, res) => {
       id: req.params.id,
     },
   })
-    .then((tagRemoved) => {
-      res.json(`${tagRemoved} tag were removed from the database`);
+    .then((dbTag) => {
+      if (!dbTag) {
+        res.status(404).json({ message: "No tag found with this id" });
+        return;
+      }
+      res.json(`Tag was successfully removed from the database`);
     })
     .catch((err) => {
       res.json(err);
